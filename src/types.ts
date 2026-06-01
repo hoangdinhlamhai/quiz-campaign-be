@@ -449,3 +449,17 @@ export interface NumerologyProfile {
   // Summary
   summary: string;
 }
+
+// ----- Numerology personal lookup (entry form: chips + real lookup count) -----
+export interface NumberMeaning {
+  number: number;
+  keywords: string[];
+  strength: string;
+  weakness: string;
+  desc: string;
+}
+
+export interface NumerologyLookupMeta {
+  count: number;
+  numbers: NumberMeaning[];
+}

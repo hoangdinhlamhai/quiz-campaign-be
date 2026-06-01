@@ -39,7 +39,8 @@ const PERSONAL_YEAR_TITLES: Record<number, string> = {
 const CAREER_GROUPS = ['Quản lý', 'Kỹ thuật', 'Xã hội', 'Nghệ thuật', 'Nghiên cứu', 'Nghiệp vụ'] as const;
 
 export function getNumInfo(n: number): NumInfo {
-  return NUM_DATA[n] ?? NUM_DATA[Math.min(n, 9)];
+  // Guard: tên không có nguyên âm/phụ âm → soul/personality = 0; số ngoài bảng → kẹp về 1-9
+  return NUM_DATA[n] ?? NUM_DATA[Math.min(Math.max(n, 1), 9)] ?? NUM_DATA[1];
 }
 
 export { NUM_DATA, CYCLE_NAMES, PERSONAL_YEAR_TITLES, CAREER_GROUPS };
