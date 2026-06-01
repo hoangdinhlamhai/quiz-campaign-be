@@ -1,0 +1,4 @@
+# Cloudflare Workers dev vars
+# Add secrets here for local dev (not committed to git)
+# Example:
+# API_SECRET=your-secret-here
