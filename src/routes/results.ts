@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { eq } from 'drizzle-orm';
 import { getDb } from '../db/client';
 import { userResults, quizzes } from '../db/schema';
-import type { ResultResponse, LockedResult, UnlockedResult, ScoreResult, MbtiResult, MbtiDetail, DiscResult, LikertResult, BigFiveResult, MiResult } from '../types';
+import type { ResultResponse, LockedResult, UnlockedResult, ScoreResult, MbtiResult, MbtiDetail, DiscResult, LikertResult, BigFiveResult, MiResult, IqResult } from '../types';
 
 type Env = { Bindings: { DB: D1Database } };
 
@@ -64,6 +64,13 @@ async function enrichScore(scoreData: ScoreResult, slug: string): Promise<void> 
     try {
       const { getMiDetail } = await import('../data/score-interpretations');
       (scoreData as MiResult).detail = getMiDetail((scoreData as MiResult).intelligences);
+    } catch { /* noop */ }
+    return;
+  }
+  if (scoreData.kind === 'IQ') {
+    try {
+      const { getIqDetail } = await import('../data/iq-interpretation');
+      (scoreData as IqResult).detail = getIqDetail((scoreData as IqResult).iqScore);
     } catch { /* noop */ }
   }
 }
