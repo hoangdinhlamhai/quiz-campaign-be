@@ -1,7 +1,6 @@
-import { nanoid } from 'nanoid';
 import { CAT_NGHE_NGHIEP } from './categories.js';
 
-const quizId = nanoid();
+const quizId = 'qz_trac-nghiem-da-tri-tue-mi';
 
 type MiDimension = 'NGON_NGU' | 'LOGIC' | 'KHONG_GIAN' | 'AM_NHAC' | 'VAN_DONG' | 'THIEN_NHIEN' | 'TUONG_TAC' | 'NOI_TAM';
 
@@ -81,33 +80,22 @@ for (const dim of dimensions) {
 }
 
 export const miQuiz = {
-  id: quizId,
-  categoryId: CAT_NGHE_NGHIEP,
+  id: quizId, categoryId: CAT_NGHE_NGHIEP,
   title: 'Trắc nghiệm Đa trí tuệ (MI)',
   slug: 'trac-nghiem-da-tri-tue-mi',
-  description: 'Khám phá 8 loại trí thông minh theo lý thuyết Howard Gardner: ngôn ngữ, logic, không gian, âm nhạc, vận động, thiên nhiên, tương tác, nội tâm.',
+  description: 'Khám phá 8 loại trí thông minh theo lý thuyết Howard Gardner.',
   instruction: 'Đánh giá mức độ đồng ý với mỗi phát biểu theo thang 1-5.',
-  thumbnailUrl: '/thumbnails/mi.png',
-  quizType: 'MI_LIKERT' as const,
-  answerFormat: 'LIKERT_SCALE' as const,
-  scaleMin: 1,
-  scaleMax: 5,
-  scaleLabelMin: 'Hoàn toàn không đồng ý',
-  scaleLabelMax: 'Hoàn toàn đồng ý',
-  timeLimitMins: 20,
-  totalQuestions: allQuestions.length,
-  isPublished: true,
-  viewCount: 0,
-  completionCount: 0,
-  createdAt: Date.now(),
+  thumbnailUrl: '/images/thumbnails/thumb-mi.png',
+  quizType: 'MI_LIKERT' as const, answerFormat: 'LIKERT_SCALE' as const,
+  scaleMin: 1, scaleMax: 5,
+  scaleLabelMin: 'Hoàn toàn không đồng ý', scaleLabelMax: 'Hoàn toàn đồng ý',
+  timeLimitMins: 20, totalQuestions: allQuestions.length,
+  isPublished: true, viewCount: 0, completionCount: 0, createdAt: Date.now(),
 };
 
 export const miQuestionsData = allQuestions.map((q, i) => ({
-  id: nanoid(),
-  quizId,
-  content: q.content,
-  imageUrl: null,
-  orderNumber: i + 1,
-  dimensionKey: q.dimensionKey,
+  id: `${quizId}_q${i + 1}`, quizId,
+  content: q.content, imageUrl: null,
+  orderNumber: i + 1, dimensionKey: q.dimensionKey,
   isReverseScored: false,
 }));

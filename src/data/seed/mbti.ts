@@ -1,7 +1,6 @@
-import { nanoid } from 'nanoid';
 import { CAT_TRI_TUE } from './categories.js';
 
-const quizId = nanoid();
+const quizId = 'qz_trac-nghiem-mbti';
 
 const mbtiQuestions: Array<{
   content: string;
@@ -41,7 +40,7 @@ export const mbtiQuiz = {
   slug: 'trac-nghiem-mbti',
   description: 'Khám phá nhóm tính cách MBTI của bạn qua 24 câu hỏi. Tìm hiểu điểm mạnh, điểm yếu và nghề nghiệp phù hợp.',
   instruction: 'Chọn câu trả lời mô tả đúng bạn nhất. Không có đáp án đúng hay sai.',
-  thumbnailUrl: '/thumbnails/mbti.png',
+  thumbnailUrl: '/images/thumbnails/thumb-mbti.png',
   quizType: 'MBTI' as const,
   answerFormat: 'TEXT_CHOICE' as const,
   scaleMin: null,
@@ -57,7 +56,7 @@ export const mbtiQuiz = {
 };
 
 export const mbtiQuestionsData = mbtiQuestions.map((q, i) => {
-  const qId = nanoid();
+  const qId = `${quizId}_q${i + 1}`;
   return {
     question: {
       id: qId,
@@ -69,7 +68,7 @@ export const mbtiQuestionsData = mbtiQuestions.map((q, i) => {
       isReverseScored: false,
     },
     answers: q.answers.map((text, ai) => ({
-      id: nanoid(),
+      id: `${qId}_a${ai + 1}`,
       questionId: qId,
       content: text,
       imageUrl: null,

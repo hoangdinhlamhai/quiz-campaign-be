@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import { resolve } from 'path';
+import { readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import type { QuizType, AnswerFormat } from '../../types.js';
@@ -18,12 +19,23 @@ import { careerQuiz, careerQuestionsData } from './career.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const DB_PATH = resolve(
-  __dirname,
-  '../../../.wrangler/state/v3/d1/miniflare-D1DatabaseObject/c204843922c7d8b0460aacd7d5eef263a2ad6de9bd92c76a90ee80ed8b6b331b.sqlite'
-);
+function findDbPath(): string {
+  const baseDir = resolve(__dirname, '../../../.wrangler/state/v3/d1/miniflare-D1DatabaseObject');
+  try {
+    const files = readdirSync(baseDir).filter(f => f.endsWith('.sqlite') && f !== 'metadata.sqlite');
+    if (files.length === 0) throw new Error('No .sqlite file found');
+    return resolve(baseDir, files[0]);
+  } catch {
+    throw new Error(
+      'DB file not found. Run "npm run db:migrate" first to create the local D1 database.'
+    );
+  }
+}
 
 function seed() {
+  const DB_PATH = findDbPath();
+  console.log(`Using DB: ${DB_PATH}`);
+
   const db = new Database(DB_PATH);
   db.pragma('journal_mode = WAL');
   db.pragma('foreign_keys = ON');
@@ -60,25 +72,13 @@ function seed() {
     );
 
     interface QuizRow {
-      id: string;
-      categoryId: string;
-      title: string;
-      slug: string;
-      description: string | null;
-      instruction: string | null;
-      thumbnailUrl: string | null;
-      quizType: QuizType;
-      answerFormat: AnswerFormat;
-      scaleMin: number | null;
-      scaleMax: number | null;
-      scaleLabelMin: string | null;
-      scaleLabelMax: string | null;
-      timeLimitMins: number;
-      totalQuestions: number;
-      isPublished: boolean;
-      viewCount: number;
-      completionCount: number;
-      createdAt: number;
+      id: string; categoryId: string; title: string; slug: string;
+      description: string | null; instruction: string | null; thumbnailUrl: string | null;
+      quizType: QuizType; answerFormat: AnswerFormat;
+      scaleMin: number | null; scaleMax: number | null;
+      scaleLabelMin: string | null; scaleLabelMax: string | null;
+      timeLimitMins: number; totalQuestions: number;
+      isPublished: boolean; viewCount: number; completionCount: number; createdAt: number;
     }
 
     function seedQuiz(quiz: QuizRow) {
@@ -148,7 +148,7 @@ function seed() {
     seedQuiz(careerQuiz);
     seedQuestionsWithAnswers(careerQuestionsData);
 
-    console.log('Seed complete!');
+    console.log('\n✅ Seed complete!');
     console.log(`Categories: ${categoriesData.length}`);
 
     const quizCount = db.prepare('SELECT COUNT(*) as cnt FROM quizzes').get() as { cnt: number };
@@ -158,7 +158,15 @@ function seed() {
     console.log(`Questions: ${questionCount.cnt}`);
     console.log(`Answers: ${answerCount.cnt}`);
 
-    console.log('\nLookup tools (convention for FE):');
+    // Show quiz list
+    const quizList = db.prepare('SELECT id, slug, quiz_type, total_questions, is_published FROM quizzes ORDER BY slug').all() as any[];
+    console.log('\n📋 Quiz list:');
+    for (const q of quizList) {
+      const pub = q.is_published ? '✅' : '⏸️';
+      console.log(`  ${pub} ${q.slug} [${q.quiz_type}] — ${q.total_questions} câu — id: ${q.id}`);
+    }
+
+    console.log('\n🔮 Lookup tools (convention for FE):');
     for (const tool of LOOKUP_TOOLS) {
       console.log(`  - ${tool.name} [${tool.lookupType}] → slug: ${tool.slug}`);
     }

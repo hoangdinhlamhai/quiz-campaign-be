@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { CAT_TRI_TUE } from './categories.js';
 
 interface DiscQuestion {
@@ -49,56 +48,37 @@ function makeDiscQuestions(count: number): DiscQuestion[] {
     { content: 'Bạn muốn sếp của mình:', answers: [{ text: 'Giao mục tiêu rõ ràng rồi để bạn tự làm', pole: 'D' }, { text: 'Thân thiện, hay khen và tạo không khí vui', pole: 'I' }, { text: 'Hỗ trợ, kiên nhẫn và dễ tiếp cận', pole: 'S' }, { text: 'Chuyên nghiệp, công bằng và có chuyên môn cao', pole: 'C' }] },
     { content: 'Khi phải thích nghi với công nghệ mới:', answers: [{ text: 'Dùng thử ngay, tự mày mò', pole: 'D' }, { text: 'Nhờ bạn bè hướng dẫn, học cùng nhau', pole: 'I' }, { text: 'Chờ người khác dùng trước, học theo sau', pole: 'S' }, { text: 'Đọc hướng dẫn sử dụng chi tiết trước', pole: 'C' }] },
   ];
-
   return pool.slice(0, count);
 }
 
 function buildDiscQuiz(questionCount: 20 | 30 | 40) {
-  const quizId = nanoid();
+  const quizId = `qz_trac-nghiem-disc-${questionCount}`;
   const questions = makeDiscQuestions(questionCount);
 
   const quiz = {
-    id: quizId,
-    categoryId: CAT_TRI_TUE,
+    id: quizId, categoryId: CAT_TRI_TUE,
     title: `Trắc nghiệm DISC (${questionCount} câu)`,
     slug: `trac-nghiem-disc-${questionCount}`,
     description: `Khám phá phong cách hành vi DISC của bạn qua ${questionCount} câu hỏi tình huống thực tế.`,
     instruction: 'Chọn câu trả lời mô tả đúng bạn nhất trong mỗi tình huống.',
-    thumbnailUrl: '/thumbnails/disc.png',
-    quizType: 'DISC' as const,
-    answerFormat: 'TEXT_CHOICE' as const,
-    scaleMin: null,
-    scaleMax: null,
-    scaleLabelMin: null,
-    scaleLabelMax: null,
+    thumbnailUrl: '/images/thumbnails/thumb-disc.png',
+    quizType: 'DISC' as const, answerFormat: 'TEXT_CHOICE' as const,
+    scaleMin: null, scaleMax: null, scaleLabelMin: null, scaleLabelMax: null,
     timeLimitMins: questionCount <= 20 ? 10 : questionCount <= 30 ? 15 : 20,
     totalQuestions: questionCount,
-    isPublished: true,
-    viewCount: 0,
-    completionCount: 0,
-    createdAt: Date.now(),
+    isPublished: true, viewCount: 0, completionCount: 0, createdAt: Date.now(),
   };
 
   const questionsData = questions.map((q, i) => {
-    const qId = nanoid();
+    const qId = `${quizId}_q${i + 1}`;
     return {
       question: {
-        id: qId,
-        quizId,
-        content: q.content,
-        imageUrl: null,
-        orderNumber: i + 1,
-        dimensionKey: null,
-        isReverseScored: false,
+        id: qId, quizId, content: q.content, imageUrl: null,
+        orderNumber: i + 1, dimensionKey: null, isReverseScored: false,
       },
-      answers: q.answers.map((a) => ({
-        id: nanoid(),
-        questionId: qId,
-        content: a.text,
-        imageUrl: null,
-        isCorrect: false,
-        scoreValue: 0,
-        dimensionPole: a.pole,
+      answers: q.answers.map((a, ai) => ({
+        id: `${qId}_a${ai + 1}`, questionId: qId, content: a.text, imageUrl: null,
+        isCorrect: false, scoreValue: 0, dimensionPole: a.pole,
       })),
     };
   });

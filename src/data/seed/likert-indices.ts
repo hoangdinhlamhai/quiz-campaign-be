@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { CAT_TRI_TUE } from './categories.js';
 
 interface LikertQuizDef {
@@ -34,6 +33,17 @@ const likertDefs: LikertQuizDef[] = [
       { content: 'Tôi biết cách tạo động lực cho người khác khi họ chán nản.' },
       { content: 'Tôi thường cảm thấy bất lực trước cảm xúc tiêu cực.', isReverse: true },
       { content: 'Tôi có khả năng đọc được không khí của một cuộc trò chuyện.' },
+      // 10 câu mới
+      { content: 'Tôi biết cách điều chỉnh cảm xúc phù hợp với hoàn cảnh.' },
+      { content: 'Tôi dễ dàng nhận ra khi mình đang ghen tị hay đố kỵ.' },
+      { content: 'Tôi thường mất kiểm soát cảm xúc khi quá mệt.', isReverse: true },
+      { content: 'Tôi có thể an ủi người khác một cách hiệu quả.' },
+      { content: 'Tôi hiểu rõ điều gì khiến mình vui hay buồn.' },
+      { content: 'Tôi dễ bị cuốn theo cảm xúc tiêu cực của đám đông.', isReverse: true },
+      { content: 'Tôi biết cách chuyển hóa cảm xúc tiêu cực thành động lực.' },
+      { content: 'Tôi có thể duy trì sự lạc quan trong hoàn cảnh khó khăn.' },
+      { content: 'Tôi nhận ra ảnh hưởng của cảm xúc mình lên người xung quanh.' },
+      { content: 'Tôi có khả năng đồng cảm sâu sắc với nỗi đau của người khác.' },
     ],
   },
   {
@@ -61,6 +71,17 @@ const likertDefs: LikertQuizDef[] = [
       { content: 'Tôi thích khám phá những lĩnh vực hoàn toàn mới.' },
       { content: 'Tôi cảm thấy thoải mái với sự mơ hồ và không chắc chắn.' },
       { content: 'Tôi hay ghi lại ý tưởng bất chợt để phát triển sau.' },
+      // 10 câu mới
+      { content: 'Tôi thường tìm cách cải thiện sản phẩm hoặc dịch vụ hiện có.' },
+      { content: 'Tôi thích chơi với các khái niệm và thử nghiệm ý tưởng.' },
+      { content: 'Tôi khó nghĩ ra ý tưởng mới khi bị áp lực.', isReverse: true },
+      { content: 'Tôi hay nhìn thấy vẻ đẹp trong những thứ người khác bỏ qua.' },
+      { content: 'Tôi thích tạo ra thứ gì đó từ con số không.' },
+      { content: 'Tôi cảm thấy nhàm chán khi làm cùng một việc lặp đi lặp lại.', isReverse: true },
+      { content: 'Tôi có khả năng kể chuyện hấp dẫn và sinh động.' },
+      { content: 'Tôi thường nghĩ đến giải pháp mà người khác chưa thấy.' },
+      { content: 'Tôi thích brainstorm tự do mà không bị giới hạn.' },
+      { content: 'Tôi dễ dàng thích nghi và sáng tạo trong môi trường mới.' },
     ],
   },
   {
@@ -88,6 +109,17 @@ const likertDefs: LikertQuizDef[] = [
       { content: 'Tôi thường tìm được mặt tích cực trong tình huống tiêu cực.' },
       { content: 'Tôi cảm thấy mạnh mẽ hơn sau mỗi lần vượt qua khó khăn.' },
       { content: 'Tôi có mạng lưới hỗ trợ tốt khi cần giúp đỡ.' },
+      // 10 câu mới
+      { content: 'Tôi không để thất bại trong quá khứ ngăn cản mình thử lại.' },
+      { content: 'Tôi hay tự hỏi "tôi có thể làm gì?" thay vì "tại sao lại là tôi?".' },
+      { content: 'Tôi thường cảm thấy choáng ngợp khi có quá nhiều vấn đề.', isReverse: true },
+      { content: 'Tôi tin rằng mỗi khó khăn đều mang đến một bài học.' },
+      { content: 'Tôi có thể đưa ra quyết định tỉnh táo ngay cả khi căng thẳng.' },
+      { content: 'Tôi dễ dàng từ bỏ hy vọng khi mọi thứ đi sai hướng.', isReverse: true },
+      { content: 'Tôi biết cách chia nhỏ vấn đề lớn thành các bước nhỏ.' },
+      { content: 'Tôi cảm thấy tự tin khi đối mặt với thử thách mới.' },
+      { content: 'Tôi thường xem lại sai lầm để tránh lặp lại.' },
+      { content: 'Tôi có khả năng truyền cảm hứng vượt khó cho người khác.' },
     ],
   },
   {
@@ -115,6 +147,17 @@ const likertDefs: LikertQuizDef[] = [
       { content: 'Tôi biết khi nào nên nói và khi nào nên im lặng.' },
       { content: 'Tôi cảm thấy thoải mái khi phải nói trước đám đông.' },
       { content: 'Tôi có khả năng xây dựng mạng lưới quan hệ rộng.' },
+      // 10 câu mới
+      { content: 'Tôi biết cách xin lỗi chân thành khi mắc sai lầm.' },
+      { content: 'Tôi dễ dàng đoán được người khác đang nghĩ gì.' },
+      { content: 'Tôi thường gặp khó khăn khi phải làm việc nhóm.', isReverse: true },
+      { content: 'Tôi biết cách khơi gợi để người khác chia sẻ ý kiến.' },
+      { content: 'Tôi nhận ra sự thay đổi nhỏ trong thái độ của người quen.' },
+      { content: 'Tôi hay vô tình gây hiểu lầm trong giao tiếp.', isReverse: true },
+      { content: 'Tôi có thể tạo không khí thoải mái trong cuộc họp.' },
+      { content: 'Tôi biết cách từ chối lịch sự mà không làm mất lòng.' },
+      { content: 'Tôi thường được mọi người tìm đến để giải quyết mâu thuẫn.' },
+      { content: 'Tôi có khả năng lắng nghe tích cực và phản hồi phù hợp.' },
     ],
   },
   {
@@ -142,41 +185,39 @@ const likertDefs: LikertQuizDef[] = [
       { content: 'Tôi có khả năng giữ thăng bằng tốt.' },
       { content: 'Tôi chăm sóc sức khỏe chủ động (khám định kỳ, tiêm phòng).' },
       { content: 'Tôi cảm thấy khỏe mạnh và tự tin về thể chất của mình.' },
+      // 10 câu mới
+      { content: 'Tôi có khả năng hồi phục nhanh sau chấn thương nhẹ.' },
+      { content: 'Tôi thường xuyên đi bộ hoặc leo cầu thang thay vì dùng thang máy.' },
+      { content: 'Tôi hay ăn đồ ăn nhanh hoặc thức ăn không lành mạnh.', isReverse: true },
+      { content: 'Tôi có thể tập trung tốt hơn sau khi vận động.' },
+      { content: 'Tôi biết cách hít thở đúng để thư giãn và tăng năng lượng.' },
+      { content: 'Tôi thường thức khuya và ngủ không đủ giấc.', isReverse: true },
+      { content: 'Tôi cảm thấy tự tin khi tham gia các hoạt động thể thao.' },
+      { content: 'Tôi biết cách căng cơ và giãn cơ đúng cách.' },
+      { content: 'Tôi có thể duy trì một nhịp sống năng động và tích cực.' },
+      { content: 'Tôi nhận thức rõ tín hiệu cơ thể khi đói, khát hay mệt.' },
     ],
   },
 ];
 
 function buildLikertQuiz(def: LikertQuizDef) {
-  const quizId = nanoid();
+  const quizId = `qz_${def.slug}`;
   const quiz = {
-    id: quizId,
-    categoryId: CAT_TRI_TUE,
-    title: def.title,
-    slug: def.slug,
-    description: def.description,
+    id: quizId, categoryId: CAT_TRI_TUE,
+    title: def.title, slug: def.slug, description: def.description,
     instruction: 'Đánh giá mức độ đồng ý với mỗi phát biểu theo thang 1-5.',
-    thumbnailUrl: `/thumbnails/${def.slug.replace('trac-nghiem-', '')}.png`,
-    quizType: 'SCORED' as const,
-    answerFormat: 'LIKERT_SCALE' as const,
-    scaleMin: 1,
-    scaleMax: 5,
-    scaleLabelMin: 'Hoàn toàn không đồng ý',
-    scaleLabelMax: 'Hoàn toàn đồng ý',
-    timeLimitMins: 10,
-    totalQuestions: def.questions.length,
-    isPublished: true,
-    viewCount: 0,
-    completionCount: 0,
-    createdAt: Date.now(),
+    thumbnailUrl: `/images/thumbnails/thumb-${def.slug.replace('trac-nghiem-', '')}.png`,
+    quizType: 'SCORED' as const, answerFormat: 'LIKERT_SCALE' as const,
+    scaleMin: 1, scaleMax: 5,
+    scaleLabelMin: 'Hoàn toàn không đồng ý', scaleLabelMax: 'Hoàn toàn đồng ý',
+    timeLimitMins: 15, totalQuestions: def.questions.length,
+    isPublished: true, viewCount: 0, completionCount: 0, createdAt: Date.now(),
   };
 
   const questionsData = def.questions.map((q, i) => ({
-    id: nanoid(),
-    quizId,
-    content: q.content,
-    imageUrl: null,
-    orderNumber: i + 1,
-    dimensionKey: 'TOTAL',
+    id: `${quizId}_q${i + 1}`, quizId,
+    content: q.content, imageUrl: null,
+    orderNumber: i + 1, dimensionKey: 'TOTAL',
     isReverseScored: q.isReverse ?? false,
   }));
 

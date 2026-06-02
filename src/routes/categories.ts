@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { eq, sql } from 'drizzle-orm';
+import { eq, sql, and } from 'drizzle-orm';
 import { getDb } from '../db/client';
 import { categories, quizzes } from '../db/schema';
 import type { CategorySummary } from '../types';
@@ -31,7 +31,7 @@ route.get('/categories', async (c) => {
         const countRow = await db
           .select({ count: sql<number>`count(*)` })
           .from(quizzes)
-          .where(eq(quizzes.categoryId, cat.id));
+          .where(and(eq(quizzes.categoryId, cat.id), eq(quizzes.isPublished, true)));
 
         const summary: CategorySummary = {
           ...cat,
@@ -52,7 +52,7 @@ route.get('/categories', async (c) => {
               timeLimitMins: quizzes.timeLimitMins,
             })
             .from(quizzes)
-            .where(eq(quizzes.categoryId, cat.id));
+            .where(and(eq(quizzes.categoryId, cat.id), eq(quizzes.isPublished, true)));
 
           summary.quizzes = quizList as CategorySummary['quizzes'];
         }

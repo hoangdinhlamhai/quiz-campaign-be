@@ -1,8 +1,7 @@
-import { nanoid } from 'nanoid';
-
-export const CAT_THAN_SO_HOC = nanoid();
-export const CAT_MBTI = nanoid();
-export const CAT_TRAC_NGHIEM_NGHE = nanoid();
+// Deterministic IDs — stable across re-seeds
+export const CAT_THAN_SO_HOC = 'cat_than-so-hoc';
+export const CAT_MBTI = 'cat_mbti-quiz';
+export const CAT_TRAC_NGHIEM_NGHE = 'cat_trac-nghiem-nghe';
 
 // Backward compat aliases — old seed files import these names
 export const CAT_TRI_TUE = CAT_MBTI;

@@ -1,7 +1,6 @@
-import { nanoid } from 'nanoid';
 import { CAT_NGHE_NGHIEP } from './categories.js';
 
-const quizId = nanoid();
+const quizId = 'qz_trac-nghiem-suc-khoe-tam-ly';
 
 const psychQuestions: Array<{ content: string; isReverse?: boolean }> = [
   { content: 'Tôi cảm thấy hài lòng với cuộc sống hiện tại.' },
@@ -27,33 +26,22 @@ const psychQuestions: Array<{ content: string; isReverse?: boolean }> = [
 ];
 
 export const psychologyQuiz = {
-  id: quizId,
-  categoryId: CAT_NGHE_NGHIEP,
+  id: quizId, categoryId: CAT_NGHE_NGHIEP,
   title: 'Trắc nghiệm sức khỏe tâm lý',
   slug: 'trac-nghiem-suc-khoe-tam-ly',
   description: 'Đánh giá tổng quan sức khỏe tinh thần: mức độ hài lòng, stress, và cân bằng cảm xúc.',
   instruction: 'Đánh giá mức độ đồng ý với mỗi phát biểu theo thang 1-5.',
-  thumbnailUrl: '/thumbnails/psychology.png',
-  quizType: 'SCORED' as const,
-  answerFormat: 'LIKERT_SCALE' as const,
-  scaleMin: 1,
-  scaleMax: 5,
-  scaleLabelMin: 'Hoàn toàn không đồng ý',
-  scaleLabelMax: 'Hoàn toàn đồng ý',
-  timeLimitMins: 10,
-  totalQuestions: psychQuestions.length,
-  isPublished: true,
-  viewCount: 0,
-  completionCount: 0,
-  createdAt: Date.now(),
+  thumbnailUrl: '/images/thumbnails/thumb-tam-ly.png',
+  quizType: 'SCORED' as const, answerFormat: 'LIKERT_SCALE' as const,
+  scaleMin: 1, scaleMax: 5,
+  scaleLabelMin: 'Hoàn toàn không đồng ý', scaleLabelMax: 'Hoàn toàn đồng ý',
+  timeLimitMins: 10, totalQuestions: psychQuestions.length,
+  isPublished: true, viewCount: 0, completionCount: 0, createdAt: Date.now(),
 };
 
 export const psychologyQuestionsData = psychQuestions.map((q, i) => ({
-  id: nanoid(),
-  quizId,
-  content: q.content,
-  imageUrl: null,
-  orderNumber: i + 1,
-  dimensionKey: 'TOTAL',
+  id: `${quizId}_q${i + 1}`, quizId,
+  content: q.content, imageUrl: null,
+  orderNumber: i + 1, dimensionKey: 'TOTAL',
   isReverseScored: q.isReverse ?? false,
 }));
