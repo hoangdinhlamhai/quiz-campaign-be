@@ -63,6 +63,7 @@ route.get('/categories', async (c) => {
 
     return c.json(result);
   } catch (err) {
+    console.error('GET /api/categories failed', err);
     return c.json({ error: 'Failed to fetch categories' }, 500);
   }
 });
